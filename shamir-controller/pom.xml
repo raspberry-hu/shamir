@@ -10,6 +10,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>shamir-controller</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+        <!-- 内部 jar start -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shamir-service</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.7.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- 内部 jar end -->
+    </dependencies>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

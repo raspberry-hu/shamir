@@ -11,10 +11,45 @@
 
     <artifactId>shamir-dal</artifactId>
 
+    <dependencies>
+
+        <!--数据源相关 开始 -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--数据源相关 结束 -->
+
+        <!--内部jar包 开始 -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shamir-util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--内部jar包 结束 -->
+    </dependencies>
+
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.0</version>
+                <configuration>
+                    <overwrite>true</overwrite>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
