@@ -9,7 +9,7 @@ CREATE TABLE `shamir`.`user`
     `phone`    VARCHAR(45) NOT NULL,
     `role`     VARCHAR(45) NOT NULL,
     `shamirId` VARCHAR(45)  NOT NULL,
-    `shamirKey` varchar(125) NOT NULL,
+    `shamirKey` VARCHAR(125) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
