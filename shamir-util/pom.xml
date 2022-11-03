@@ -14,7 +14,6 @@
         <dependency>
             <groupId>com.codahale</groupId>
             <artifactId>shamir</artifactId>
-            <version>0.7.0</version>
         </dependency>
 
         <dependency>

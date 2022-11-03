@@ -10,9 +10,11 @@ import com.share.shamir.util.shamir.ShamirUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class UserManageServiceImpl implements UserManageService {
 
     private static Logger LOGGER = LoggerFactory.getLogger(UserManageServiceImpl.class);

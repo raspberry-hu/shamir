@@ -17,16 +17,16 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <!--内部jar包 开始 -->
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>shamir-dal</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>shamir-util</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <!--内部jar包 结束-->
     </dependencies>
 
 

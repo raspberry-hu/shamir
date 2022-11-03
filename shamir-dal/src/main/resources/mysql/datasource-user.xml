@@ -28,5 +28,4 @@
                   value="com.share.shamir.dal.user.mapper" />
         <property name="sqlSessionFactoryBeanName" value="userSqlSessionFactory" />
     </bean>
-    <jdbc:embedded-database id="userDataSource"/>
 </beans>

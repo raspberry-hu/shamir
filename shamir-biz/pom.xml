@@ -14,8 +14,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
-            <version>2.7.3</version>
         </dependency>
+        <!-- 内部 jar start -->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>shamir-controller</artifactId>
+        </dependency>
+        <!-- 内部 jar end -->
     </dependencies>
 
     <properties>
