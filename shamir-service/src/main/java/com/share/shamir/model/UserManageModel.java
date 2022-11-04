@@ -1,7 +1,6 @@
-package com.share.shamir.management.model;
+package com.share.shamir.model;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class UserManageModel extends ToString{
 

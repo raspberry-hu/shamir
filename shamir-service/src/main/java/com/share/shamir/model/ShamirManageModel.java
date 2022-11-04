@@ -1,4 +1,4 @@
-package com.share.shamir.management.model;
+package com.share.shamir.model;
 
 public class ShamirManageModel extends ToString{
     private static final long serialVersionUID = -8683261837580068195L;

@@ -1,6 +1,6 @@
-package com.share.shamir.management.service;
+package com.share.shamir.service;
 
-import com.share.shamir.management.model.UserManageModel;
+import com.share.shamir.model.UserManageModel;
 
 import java.util.List;
 

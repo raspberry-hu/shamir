@@ -1,11 +1,11 @@
-package com.share.shamir.management.service;
+package com.share.shamir.service;
 
 import com.share.shamir.dal.entity.Shamir;
 import com.share.shamir.dal.entity.User;
 import com.share.shamir.dal.mapper.OrganizationMapper;
 import com.share.shamir.dal.mapper.ShamirMapper;
 import com.share.shamir.dal.mapper.UserMapper;
-import com.share.shamir.management.model.UserManageModel;
+import com.share.shamir.model.UserManageModel;
 import com.share.shamir.util.shamir.ShamirUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

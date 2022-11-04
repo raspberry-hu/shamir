@@ -1,4 +1,4 @@
-package com.share.shamir.management.model;
+package com.share.shamir.model;
 
 import com.alibaba.fastjson.JSONObject;
 
