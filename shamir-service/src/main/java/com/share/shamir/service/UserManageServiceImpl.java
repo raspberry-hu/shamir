@@ -39,6 +39,8 @@ public class UserManageServiceImpl implements UserManageService {
         user.setPassword(userManageModel.getPassword());
         user.setPhone(userManageModel.getPhone());
         user.setId(null);
+        user.setShamirkey("zero");
+        user.setShamirid("zero");
         userMapper.insert(user);
     }
 
@@ -50,7 +52,7 @@ public class UserManageServiceImpl implements UserManageService {
     @Override
     public Boolean userQuery(UserManageModel userManageModel) {
         User user = userMapper.selectByUserName(userManageModel.getUsername());
-        if(user.getPassword() == userManageModel.getPassword()) {
+        if(user != null && user.getPassword().equals(userManageModel.getPassword())) {
             return true;
         }
         return false;

@@ -3,6 +3,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
     <parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -30,6 +36,12 @@
 		<!--工具开始 版本-->
 		<fastjson.version>1.2.76</fastjson.version>
 		<shamir.version>0.7.0</shamir.version>
+		<jeos.version>0.9.15</jeos.version>
+		<eosiojava.version>1.0.0</eosiojava.version>
+		<eosiojavasoftkeysignatureprovider.version>1.0.0</eosiojavasoftkeysignatureprovider.version>
+		<eosiojavaandroidabieosserializationprovider.version>1.0.0</eosiojavaandroidabieosserializationprovider.version>
+		<eosio-java-rpc-provider.version>1.0.0</eosio-java-rpc-provider.version>
+		<eos-java-rpc-wrapper.version>master</eos-java-rpc-wrapper.version>
 		<!--工具结束 版本-->
 		<!--Sring 相关jar 开始 -->
 		<spring.version>5.3.22</spring.version>
@@ -178,6 +190,36 @@
 				<groupId>com.codahale</groupId>
 				<artifactId>shamir</artifactId>
 				<version>${shamir.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.jafka</groupId>
+				<artifactId>jeos</artifactId>
+				<version>${jeos.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>one.block</groupId>
+				<artifactId>eosiojava</artifactId>
+				<version>${eosiojava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>one.block</groupId>
+				<artifactId>eosiojavasoftkeysignatureprovider</artifactId>
+				<version>${eosiojavasoftkeysignatureprovider.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>one.block</groupId>
+				<artifactId>eosiojavaandroidabieosserializationprovider</artifactId>
+				<version>${eosiojavaandroidabieosserializationprovider.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>one.block</groupId>
+				<artifactId>eosio-java-rpc-provider</artifactId>
+				<version>${eosio-java-rpc-provider.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.EOSEssentials</groupId>
+				<artifactId>eos-java-rpc-wrapper</artifactId>
+				<version>${eos-java-rpc-wrapper.version}</version>
 			</dependency>
 			<!-- 常用工具 结束 -->
 

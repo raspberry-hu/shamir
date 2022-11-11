@@ -25,7 +25,7 @@
     </bean>
     <bean name="userMapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage"
-                  value="com.share.shamir.dal.user.mapper" />
+                  value="com.share.shamir.dal.mapper" />
         <property name="sqlSessionFactoryBeanName" value="userSqlSessionFactory" />
     </bean>
 </beans>

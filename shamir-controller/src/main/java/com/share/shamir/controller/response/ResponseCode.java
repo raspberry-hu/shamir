@@ -2,8 +2,8 @@ package com.share.shamir.controller.response;
 
 public class ResponseCode {
 
-    public final static ResponseCode SUCCESS = new ResponseCode(0);
-    public final static ResponseCode ERROR = new ResponseCode(1);
+    public final static ResponseCode SUCCESS = new ResponseCode(200);
+    public final static ResponseCode ERROR = new ResponseCode(500);
 
     private Integer code;
 

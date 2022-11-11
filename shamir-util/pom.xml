@@ -20,6 +20,31 @@
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.jafka</groupId>
+            <artifactId>jeos</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>one.block</groupId>
+            <artifactId>eosiojava</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>one.block</groupId>
+            <artifactId>eosiojavasoftkeysignatureprovider</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.EOSEssentials</groupId>
+            <artifactId>eos-java-rpc-wrapper</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>one.block</groupId>
+            <artifactId>eosio-java-rpc-provider</artifactId>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
