@@ -1,5 +1,9 @@
 package com.share.shamir.util.eosio.java.abieos.serialization;
 
+import client.domain.response.chain.AbiJsonToBin;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import one.block.eosiojava.error.session.TransactionPrepareError;
 import one.block.eosiojava.error.session.TransactionSignAndBroadCastError;
 import one.block.eosiojava.implementations.ABIProviderImpl;
@@ -16,6 +20,7 @@ import one.block.eosiojavaabieosserializationprovider.AbiEosSerializationProvide
 import one.block.eosiojavarpcprovider.implementations.EosioJavaRpcProviderImpl;
 import one.block.eosiosoftkeysignatureprovider.SoftKeySignatureProviderImpl;
 
+import javax.servlet.http.HttpUtils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +35,7 @@ public class provider {
 //    }
 
     public static void main(String[] args) throws Exception {
-        IRPCProvider rpcProvider = new EosioJavaRpcProviderImpl("http://172.17.0.9:8888");
+        IRPCProvider rpcProvider = new EosioJavaRpcProviderImpl("http://10.28.217.174:10101");
         ISerializationProvider serializationProvider = new AbiEosSerializationProviderImpl();
         IABIProvider abiProvider = new ABIProviderImpl(rpcProvider, serializationProvider);
         ISignatureProvider signatureProvider = new SoftKeySignatureProviderImpl();
@@ -50,6 +55,14 @@ public class provider {
                 "\"asset\": \"1000000000.0000 TT\",\n" +
                 "\"memo\" : \"Something\"\n" +
                 "}";
+        JSONObject jo = new JSONObject();
+        jo.put("code","eosio.token");
+        jo.put("action","create");
+        jo.put("name","tt");
+        jo.put("asset","10000.0000 TT");
+        jo.put("memo","Something");
+        String url = "http://10.28.217.174:10101" + "/v1/chain/abi_json_to_bin";
+        AbiJsonToBin data = JSON.parseObject(HttpUtils.post(url, jo.toString()), new TypeReference<AbiJsonToBin>() {});
 //        Action action = new Action("eosio.token", "create", Collections.singletonList(new Authorization("eosio.token", "active")), jsonData);
         List<Authorization> authorizations =
                 new ArrayList<>();
