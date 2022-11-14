@@ -45,6 +45,11 @@
             <groupId>one.block</groupId>
             <artifactId>eosio-java-rpc-provider</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>one.block</groupId>
+            <artifactId>eosio-java-abieos-serialization-provider</artifactId>
+        </dependency>
     </dependencies>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

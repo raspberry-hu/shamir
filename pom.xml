@@ -39,7 +39,7 @@
 		<jeos.version>0.9.15</jeos.version>
 		<eosiojava.version>1.0.0</eosiojava.version>
 		<eosiojavasoftkeysignatureprovider.version>1.0.0</eosiojavasoftkeysignatureprovider.version>
-		<eosiojavaandroidabieosserializationprovider.version>1.0.0</eosiojavaandroidabieosserializationprovider.version>
+		<eosio-java-abieos-serialization-provider.version>1.0.0</eosio-java-abieos-serialization-provider.version>
 		<eosio-java-rpc-provider.version>1.0.0</eosio-java-rpc-provider.version>
 		<eos-java-rpc-wrapper.version>master</eos-java-rpc-wrapper.version>
 		<!--工具结束 版本-->
@@ -195,11 +195,31 @@
 				<groupId>io.jafka</groupId>
 				<artifactId>jeos</artifactId>
 				<version>${jeos.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-reload4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-jdk14</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>one.block</groupId>
 				<artifactId>eosiojava</artifactId>
 				<version>${eosiojava.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-reload4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-jdk14</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>one.block</groupId>
@@ -208,8 +228,8 @@
 			</dependency>
 			<dependency>
 				<groupId>one.block</groupId>
-				<artifactId>eosiojavaandroidabieosserializationprovider</artifactId>
-				<version>${eosiojavaandroidabieosserializationprovider.version}</version>
+				<artifactId>eosio-java-abieos-serialization-provider</artifactId>
+				<version>${eosio-java-abieos-serialization-provider.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>one.block</groupId>

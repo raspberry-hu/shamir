@@ -33,7 +33,7 @@
     select
     <include refid="Base_Column_List" />
     from user
-    where username = #{id,jdbcType=STRING}
+    where username = #{id,jdbcType=VARCHAR}
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--
@@ -55,7 +55,7 @@
     select
     <include refid="Base_Column_List" />
     from user
-    where role = #{id,jdbcType=STRING}
+    where role = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
