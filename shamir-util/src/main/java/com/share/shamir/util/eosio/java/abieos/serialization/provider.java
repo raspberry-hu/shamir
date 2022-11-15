@@ -30,7 +30,7 @@ public class provider {
 //    }
 
     public static void main(String[] args) throws Exception {
-        IRPCProvider rpcProvider = new EosioJavaRpcProviderImpl("http://172.17.0.9:8888");
+        IRPCProvider rpcProvider = new EosioJavaRpcProviderImpl("http://10.28.217.174:10101");
         ISerializationProvider serializationProvider = new AbiEosSerializationProviderImpl();
         IABIProvider abiProvider = new ABIProviderImpl(rpcProvider, serializationProvider);
         ISignatureProvider signatureProvider = new SoftKeySignatureProviderImpl();
