@@ -39,8 +39,9 @@ public class Jeos {
         EosApi client = EosApiFactory.create("http://10.28.217.174:10101", "http://10.28.217.174:10101", "http://10.28.217.174:10101");
         ChainInfo info = client.getChainInfo();
         System.out.println("chain info:"+info);
-        callGetContract((long) 1);
+//        callGetContract((long) 1);
 //        callCreateContract("123","321","322");
+        callEraseContract((long) 1);
     }
     static void callCreateContract(String username, String shamirKey, String shamirUserKey) throws Exception{
         // --- get the current state of blockchain
@@ -141,7 +142,7 @@ public class Jeos {
         System.out.println(localApi.getObjectMapper().writeValueAsString(pts));
     }
 
-    static void callEraseContract(Integer id) throws Exception{
+    static void callEraseContract(Long id) throws Exception{
         // --- get the current state of blockchain
         EosApi eosApi = EosApiFactory.create(chainUrl, chainUrl, chainUrl);
         SignArg arg = eosApi.getSignArg(120);
@@ -155,7 +156,7 @@ public class Jeos {
         // ① pack transfer data
         Raw raw = new Raw();
         raw.packName("alice");
-        raw.pack(id);
+        raw.packUint64(id);
         String transferData = raw.toHex();
 
         // ③ create the authorization
