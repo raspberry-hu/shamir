@@ -23,6 +23,8 @@ import java.util.List;
 
 public class Jeos {
     static String chainUrl = "http://10.28.217.174:10101";
+    static String userPrivateKey = "5J61mY3dcgHb4egBYVWz4av68y24JzqteKRHMFrDXyhmQdbkhbr";
+    static String user = "alice";
     Jeos(String chainUrl) {
         this.chainUrl = chainUrl;
         EosApi client = EosApiFactory.create(chainUrl, chainUrl, chainUrl);
@@ -36,12 +38,12 @@ public class Jeos {
         return hash;
     }
     public static void main(String[] args) throws Exception {
-        EosApi client = EosApiFactory.create("http://10.28.217.174:10101", "http://10.28.217.174:10101", "http://10.28.217.174:10101");
+        EosApi client = EosApiFactory.create(chainUrl, chainUrl, chainUrl);
         ChainInfo info = client.getChainInfo();
         System.out.println("chain info:"+info);
 //        callGetContract((long) 1);
-//        callCreateContract("123","321","322");
-        callEraseContract((long) 1);
+        callCreateContract("123","321","322");
+//        callEraseContract((long) 1);
     }
     static void callCreateContract(String username, String shamirKey, String shamirUserKey) throws Exception{
         // --- get the current state of blockchain
@@ -50,8 +52,8 @@ public class Jeos {
         System.out.println(eosApi.getObjectMapper().writeValueAsString(arg));
 
         // --- sign the transation of token tansfer
-        String privateKey = "5J61mY3dcgHb4egBYVWz4av68y24JzqteKRHMFrDXyhmQdbkhbr";//replace the real private key
-        String from = "alice";
+        String privateKey = userPrivateKey;//replace the real private key
+        String from = user;
         LocalApi localApi = EosApiFactory.createLocalApi();
 
         // ① pack transfer data
@@ -97,13 +99,13 @@ public class Jeos {
 
     static void callGetContract(Long id) throws Exception{
         // --- get the current state of blockchain
-        EosApi eosApi = EosApiFactory.create("http://10.28.217.174:10101", "http://10.28.217.174:10101", "http://10.28.217.174:10101");
+        EosApi eosApi = EosApiFactory.create(chainUrl, chainUrl, chainUrl);
         SignArg arg = eosApi.getSignArg(120);
         System.out.println(eosApi.getObjectMapper().writeValueAsString(arg));
 
         // --- sign the transation of token tansfer
-        String privateKey = "5J61mY3dcgHb4egBYVWz4av68y24JzqteKRHMFrDXyhmQdbkhbr";//replace the real private key
-        String from = "alice";
+        String privateKey = userPrivateKey;//replace the real private key
+        String from = user;
         LocalApi localApi = EosApiFactory.createLocalApi();
 
         // ① pack transfer data
@@ -149,8 +151,8 @@ public class Jeos {
         System.out.println(eosApi.getObjectMapper().writeValueAsString(arg));
 
         // --- sign the transation of token tansfer
-        String privateKey = "5J61mY3dcgHb4egBYVWz4av68y24JzqteKRHMFrDXyhmQdbkhbr";//replace the real private key
-        String from = "alice";
+        String privateKey = userPrivateKey;
+        String from = user;
         LocalApi localApi = EosApiFactory.createLocalApi();
 
         // ① pack transfer data
