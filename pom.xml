@@ -52,6 +52,7 @@
 		<eosio-java-abieos-serialization-provider.version>1.0.0</eosio-java-abieos-serialization-provider.version>
 		<eosio-java-rpc-provider.version>1.0.0</eosio-java-rpc-provider.version>
 		<eos-java-rpc-wrapper.version>master</eos-java-rpc-wrapper.version>
+		<java-ipfs-api>v1.0.0-PRE</java-ipfs-api>
 		<!--工具结束 版本-->
 		<!--Sring 相关jar 开始 -->
 		<spring.version>5.3.22</spring.version>
@@ -251,6 +252,11 @@
 				<artifactId>eos-java-rpc-wrapper</artifactId>
 				<version>${eos-java-rpc-wrapper.version}</version>
 			</dependency>
+<!--			<dependency>-->
+<!--				<groupId>com.github.celeduc</groupId>-->
+<!--				<artifactId>java-ipfs-api</artifactId>-->
+<!--				<version>${java-ipfs-api.version}</version>-->
+<!--			</dependency>-->
 			<!-- 常用工具 结束 -->
 
 			<!--容器相关 开始 -->

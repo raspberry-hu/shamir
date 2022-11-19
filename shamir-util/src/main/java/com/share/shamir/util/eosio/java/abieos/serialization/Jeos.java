@@ -43,7 +43,7 @@ public class Jeos {
         EosApi client = EosApiFactory.create(chainUrl, chainUrl, chainUrl);
         ChainInfo info = client.getChainInfo();
         System.out.println("chain info:"+info);
-        callGetContract((long) 88);
+//        callGetContract((long) 88);
 //        callCreateContract("123","321","322");
 //        callEraseContract((long) 1);
     }
