@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class ipfsUtils {
-    private static io.ipfs.api.IPFS IPFS = new IPFS("/ip4/ipfs.io/tcp/5001");
+    private static io.ipfs.api.IPFS IPFS = new IPFS("/ip4/10.28.217.174/tcp/5001");
 
     public static void main(String[] args) throws IOException {
         IPFS.refs.local();
