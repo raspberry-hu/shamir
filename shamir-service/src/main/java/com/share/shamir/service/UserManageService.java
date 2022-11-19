@@ -49,5 +49,11 @@ public interface UserManageService {
      * @param min
      * @param keyName
      */
-    void keyDistribution(List<Integer> userId, String key, int min, String keyName);
+    Boolean keyDistribution(List<Integer> userId, String key, int min, String keyName);
+
+    /**
+     * 密钥恢复
+     * @param
+     */
+    String keyRestore(String keyName);
 }

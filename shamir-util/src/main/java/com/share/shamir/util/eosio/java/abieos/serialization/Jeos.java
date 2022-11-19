@@ -25,8 +25,10 @@ public class Jeos {
     static String chainUrl = "http://10.28.217.174:10101";
     static String userPrivateKey = "5J61mY3dcgHb4egBYVWz4av68y24JzqteKRHMFrDXyhmQdbkhbr";
     static String user = "alice";
-    Jeos(String chainUrl) {
+    Jeos(String chainUrl, String userPrivateKey, String user) {
         this.chainUrl = chainUrl;
+        this.userPrivateKey = userPrivateKey;
+        this.user = user;
         EosApi client = EosApiFactory.create(chainUrl, chainUrl, chainUrl);
         ChainInfo info = client.getChainInfo();
         System.out.println("chain info:"+info);
@@ -41,8 +43,8 @@ public class Jeos {
         EosApi client = EosApiFactory.create(chainUrl, chainUrl, chainUrl);
         ChainInfo info = client.getChainInfo();
         System.out.println("chain info:"+info);
-//        callGetContract((long) 1);
-        callCreateContract("123","321","322");
+        callGetContract((long) 88);
+//        callCreateContract("123","321","322");
 //        callEraseContract((long) 1);
     }
     static void callCreateContract(String username, String shamirKey, String shamirUserKey) throws Exception{

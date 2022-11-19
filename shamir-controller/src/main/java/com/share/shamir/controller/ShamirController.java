@@ -1,7 +1,6 @@
 package com.share.shamir.controller;
 
-import com.share.shamir.controller.request.LoginRequest;
-import com.share.shamir.controller.request.RegisterRequest;
+import com.share.shamir.controller.request.*;
 import com.share.shamir.controller.response.CommonResponse;
 import com.share.shamir.controller.response.ResponseBuilder;
 import com.share.shamir.model.UserManageModel;
@@ -14,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/shamirManagement")
@@ -56,4 +57,33 @@ public class ShamirController {
         LOGGER.info("用户注册成功");
         return ResponseBuilder.success("注册成功");
     }
+
+    @RequestMapping(value = "/getallrole", method = RequestMethod.POST)
+    public @ResponseBody CommonResponse getAllRole(@RequestBody RoleRequest roleRequest) {
+        LOGGER.info("记录接口请求参数:{}", roleRequest.getRole());
+        List<UserManageModel> userManageModelList = userManageService.getSameOrgUser(roleRequest.getRole());
+        return ResponseBuilder.success(userManageModelList);
+    }
+
+    @RequestMapping(value = "/distributekey", method = RequestMethod.POST)
+    public @ResponseBody CommonResponse distributeKey(@RequestBody DistributeKeyRequest distributeKeyRequest) {
+        LOGGER.info("记录接口请求参数:{},{},{},{}", distributeKeyRequest.getMin(), distributeKeyRequest.getKeyName(),distributeKeyRequest.getKey(), distributeKeyRequest.getUsers());
+        Boolean result = userManageService.keyDistribution(distributeKeyRequest.getUsers(), distributeKeyRequest.getKey(), distributeKeyRequest.getMin(), distributeKeyRequest.getKeyName());
+        if(result){
+            return ResponseBuilder.success("分发密钥成功");
+        }
+        return ResponseBuilder.error("分发密钥失败");
+    }
+
+    @RequestMapping(value = "/keyrestore", method = RequestMethod.POST)
+    public @ResponseBody CommonResponse keyRestore(@RequestBody KeyRestoreRequest KeyRestoreRequest) {
+        LOGGER.info("记录接口请求参数:{}", KeyRestoreRequest.getKeyName());
+        String key = userManageService.keyRestore(KeyRestoreRequest.getKeyName());
+        if(key != null){
+            return ResponseBuilder.success(key);
+        }
+        return ResponseBuilder.error("恢复密钥失败");
+    }
+
+
 }

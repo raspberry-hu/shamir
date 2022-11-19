@@ -105,7 +105,7 @@ public class UserManageServiceImpl implements UserManageService {
      * @param keyName
      */
     @Override
-    public void keyDistribution(List<Integer> userId, String key, int min, String keyName) {
+    public Boolean keyDistribution(List<Integer> userId, String key, int min, String keyName) {
         //创建密钥分配
         HashMap<Integer, byte[]> keyDistribution = new HashMap<>();
         //创建密钥分配人员数据库模型
@@ -117,6 +117,9 @@ public class UserManageServiceImpl implements UserManageService {
         for (int i = 0; i < userId.size(); i++) {
             //获取用户信息
             User user = userMapper.selectByPrimaryKey(userId.get(i));
+            if(user == null) {
+                return false;
+            }
             //获取用户密钥分配信息
             Shamir shamir = null;
             shamir.setShamirkey(String.valueOf(keyDistribution.get(i)));
@@ -126,5 +129,21 @@ public class UserManageServiceImpl implements UserManageService {
             //分配密钥
             shamirMapper.insertSelective(shamir);
         }
+        return true;
+    }
+
+    /**
+     * 恢复密钥
+     * @param keyName
+     */
+    @Override
+    public String keyRestore(String keyName) {
+        //获取密钥恢复人员信息
+        List<Shamir> shamirs = shamirMapper.selectByShamirId(keyName);
+        HashMap<Integer, byte[]> temp = new HashMap<>();
+        for(int i = 0; i < shamirs.size(); i++) {
+            temp.put(i, shamirs.get(i).getShamirkey().getBytes());
+        }
+        return ShamirUtils.shamirRecover(temp);
     }
 }
