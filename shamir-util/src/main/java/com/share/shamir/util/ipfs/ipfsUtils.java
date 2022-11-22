@@ -11,11 +11,13 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class ipfsUtils {
-    private static io.ipfs.api.IPFS IPFS = new IPFS("/ip4/10.28.217.174/tcp/5001");
+    static String ipfsURL = "10.28.217.174";
+    static String ipfsPort = "5001";
+    private static io.ipfs.api.IPFS IPFS = new IPFS("/ip4/" + ipfsURL + "/tcp/" + ipfsPort);
 
     public static void main(String[] args) throws IOException {
         IPFS.refs.local();
-        String temp = "测试";
+        String temp = "测试123";
         String upload = upload(temp.getBytes());
         System.out.println(upload);
     }
