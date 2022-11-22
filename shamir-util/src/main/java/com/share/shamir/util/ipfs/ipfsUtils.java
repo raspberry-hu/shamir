@@ -20,11 +20,11 @@ public class ipfsUtils {
         System.out.println(upload);
     }
 
-//    public static String upload(String fileName) throws IOException {
-//        NamedStreamable.FileWrapper file = new NamedStreamable.FileWrapper(new File(fileName));
-//        MerkleNode addResult = IPFS.add(file).get(0);
-//        return addResult.hash.toString();
-//    }
+    public static String upload(String fileName) throws IOException {
+        NamedStreamable.FileWrapper file = new NamedStreamable.FileWrapper(new File(fileName));
+        MerkleNode addResult = IPFS.add(file).get(0);
+        return addResult.hash.toString();
+    }
 
     public static String upload(byte[] data) throws IOException {
         NamedStreamable.ByteArrayWrapper file = new NamedStreamable.ByteArrayWrapper(data);

@@ -126,8 +126,7 @@
       This element was generated on Tue Nov 01 14:30:43 CST 2022.
     -->
     select
-    <include refid="Base_Column_List" />
-    from shamir
-    where shamirId = #{id,jdbcType=VARCHAR}
+    * from shamir
+    where shamirId = #{shamirId,jdbcType=VARCHAR}
   </select>
 </mapper>

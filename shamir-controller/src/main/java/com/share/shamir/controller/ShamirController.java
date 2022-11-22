@@ -44,7 +44,7 @@ public class ShamirController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public @ResponseBody CommonResponse register(@RequestBody RegisterRequest registerRequest) {
-        LOGGER.info("记录接口请求参数:{},{}",registerRequest.getUserName(),registerRequest.getPassword(),registerRequest.getPhone(),registerRequest.getEmail(),registerRequest.getRole());
+        LOGGER.info("记录接口请求参数:{},{},{},{},{}",registerRequest.getUserName(),registerRequest.getPassword(),registerRequest.getPhone(),registerRequest.getEmail(),registerRequest.getRole());
 
         UserManageModel userManageModel = new UserManageModel();
         userManageModel.setUsername(registerRequest.getUserName());
@@ -78,12 +78,11 @@ public class ShamirController {
     @RequestMapping(value = "/keyrestore", method = RequestMethod.POST)
     public @ResponseBody CommonResponse keyRestore(@RequestBody KeyRestoreRequest KeyRestoreRequest) {
         LOGGER.info("记录接口请求参数:{}", KeyRestoreRequest.getKeyName());
-        String key = userManageService.keyRestore(KeyRestoreRequest.getKeyName());
-        if(key != null){
+        try{
+            String key = userManageService.keyRestore(KeyRestoreRequest.getKeyName());
             return ResponseBuilder.success(key);
+        } catch (Exception e) {
+            return ResponseBuilder.error("恢复密钥失败");
         }
-        return ResponseBuilder.error("恢复密钥失败");
     }
-
-
 }
