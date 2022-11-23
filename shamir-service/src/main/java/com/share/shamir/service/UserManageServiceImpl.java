@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -124,9 +125,10 @@ public class UserManageServiceImpl implements UserManageService {
             }
             //获取用户密钥分配信息
             Shamir shamir = new Shamir();
-//            shamir.setShamirkey(new String(entry.getValue()));
-//            System.out.println(entry.getValue()[0]);
-            shamir.setShamirkey(String.valueOf(entry.getValue()));
+            byte[] a = entry.getValue();
+            System.out.println(Arrays.toString(a));
+            String aStr = new String(a, Charset.forName("ISO-8859-1"));
+            shamir.setShamirkey(aStr);
             shamir.setShamirid(keyName);
             shamir.setShamiruserkey(userId.get(i));
             shamir.setId(null);
@@ -147,26 +149,8 @@ public class UserManageServiceImpl implements UserManageService {
         System.out.println("打印0" + shamirs);
         HashMap<Integer, byte[]> temp = new HashMap<>();
         for(int i = 0; i < shamirs.size(); i++) {
-            System.out.println("打印1" + shamirs.get(i).getShamirkey());
-//            String test1 = shamirs.get(i).getShamirkey()
-            Byte[] tempString = null;
-            List<Byte> list1 = Arrays.asList(tempString);
-            list1.add((byte) shamirs.get(i).getShamirkey().charAt(0));
-            list1.add((byte) shamirs.get(i).getShamirkey().charAt(1));
-            list1.add((byte) shamirs.get(i).getShamirkey().charAt(2));
-            list1.add((byte) shamirs.get(i).getShamirkey().charAt(3));
-            list1.add((byte) shamirs.get(i).getShamirkey().charAt(4));
-            list1.toArray(tempString);
-            System.out.println("打印2" + tempString);
-            System.out.println("打印1" + shamirs.get(i).getShamirkey().getBytes(StandardCharsets.UTF_8));
-//            System.out.println("打印1" + shamirs.get(i).getShamirkey().getBytes("UTF-8"));
-//            System.out.println("打印1" + shamirs.get(i).getShamirkey().getBytes("ISO-8859-1"));
-//            System.out.println("打印1" + shamirs.get(i).getShamirkey().getBytes("US-ASCII"));
-//            System.out.println("打印1" + shamirs.get(i).getShamirkey().getBytes("UTF-16BE"));
-            temp.put(i+1, shamirs.get(i).getShamirkey().getBytes());
+            temp.put(i+1, shamirs.get(i).getShamirkey().getBytes(Charset.forName("ISO-8859-1")));
         }
-        System.out.println("打印2" + temp);
-        System.out.println("打印3" + ShamirUtils.shamirRecover(temp));
         return ShamirUtils.shamirRecover(temp);
     }
 }

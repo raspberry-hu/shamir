@@ -2,8 +2,11 @@ package com.share.shamir.util.shamir;
 
 import com.codahale.shamir.Scheme;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,10 +17,24 @@ public class ShamirUtils {
         final Map<Integer, byte[]> parts = scheme.split(secretByte);
         HashMap<Integer, byte[]> temp = new HashMap<>();
         temp.putAll(parts);
-        System.out.println("打印1" + parts.get(1)[0]);
+//        System.out.println(Charset.defaultCharset().name());
+//        byte[] a = parts.get(1);
+//        System.out.println(Arrays.toString(a));
+//        String aStr = new String(a, Charset.forName("ISO-8859-1"));
+//        byte[] b = aStr.getBytes(Charset.forName("ISO-8859-1"));
+//        System.out.println(Arrays.toString(b));
+//        String aStr = new String(parts.get(1), Charset.forName("ISO-8859-1"));
+//        System.out.println("打印1" + parts.get(1));
+//        System.out.println("打印1" + aStr);
+//        System.out.println("打印1" + aStr.getBytes(Charset.forName("ISO-8859-1")));
+//        System.out.println("打印1" + parts.get(1));
+//        System.out.println("打印1" + parts.get(1).length);
+//        System.out.println("打印1" + parts.get(1)[0]);
+//        System.out.println("打印1" + parts.get(1)[1]);
+//        System.out.println("打印1" + parts.get(1)[2]);
 //        System.out.println("打印" + temp + "长度" + temp.size() + "密钥" + secret);
 //        System.out.println("打印" + parts + "长度" + parts.size() + "密钥" + secret);
-        System.out.println(ShamirUtils.shamirRecover(temp));
+//        System.out.println(ShamirUtils.shamirRecover(temp));
         return temp;
     }
 

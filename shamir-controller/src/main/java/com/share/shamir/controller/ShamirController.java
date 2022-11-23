@@ -85,4 +85,15 @@ public class ShamirController {
             return ResponseBuilder.error("恢复密钥失败");
         }
     }
+
+    @RequestMapping(value = "/getkeyname", method = RequestMethod.POST)
+    public @ResponseBody CommonResponse keyRestore(@RequestBody GetKeyNameRequest getKeyNameRequest) {
+        LOGGER.info("记录接口请求参数:{}", getKeyNameRequest.getUsername());
+        try{
+            String key = userManageService.keyRestore(getKeyNameRequest.getUsername());
+            return ResponseBuilder.success(key);
+        } catch (Exception e) {
+            return ResponseBuilder.error("获取密钥名称失败");
+        }
+    }
 }
