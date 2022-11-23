@@ -1,6 +1,5 @@
 package com.share.shamir.util.eosio.java.abieos.serialization;
 
-import com.google.protobuf.UInt64Value;
 import io.jafka.jeos.EosApi;
 import io.jafka.jeos.EosApiFactory;
 import io.jafka.jeos.LocalApi;
@@ -21,11 +20,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
-public class Jeos {
+public class EosUtils {
     static String chainUrl = "http://10.28.217.174:10101";
     static String userPrivateKey = "5J61mY3dcgHb4egBYVWz4av68y24JzqteKRHMFrDXyhmQdbkhbr";
     static String user = "alice";
-    Jeos(String chainUrl, String userPrivateKey, String user) {
+    public EosUtils(String chainUrl, String userPrivateKey, String user) {
         this.chainUrl = chainUrl;
         this.userPrivateKey = userPrivateKey;
         this.user = user;
@@ -33,6 +32,7 @@ public class Jeos {
         ChainInfo info = client.getChainInfo();
         System.out.println("chain info:"+info);
     }
+
     private static String sign(String privateKey, SignArg arg, PackedTransaction t) {
         Raw raw = Packer.packPackedTransaction(arg.getChainId(), t);
         raw.pack(ByteBuffer.allocate(33).array());
@@ -43,11 +43,11 @@ public class Jeos {
         EosApi client = EosApiFactory.create(chainUrl, chainUrl, chainUrl);
         ChainInfo info = client.getChainInfo();
         System.out.println("chain info:"+info);
-//        callGetContract((long) 88);
-//        callCreateContract("123","321","322");
+//        callGetContract((long) 1);
+//        callCreateContract("1","123","fortest13");
 //        callEraseContract((long) 1);
     }
-    static void callCreateContract(String username, String shamirKey, String shamirUserKey) throws Exception{
+    public void callCreateContract(String username, String shamirKey, String shamirUserKey) throws Exception{
         // --- get the current state of blockchain
         EosApi eosApi = EosApiFactory.create(chainUrl, chainUrl, chainUrl);
         SignArg arg = eosApi.getSignArg(120);
@@ -64,6 +64,7 @@ public class Jeos {
         raw.pack(username);
         raw.pack(shamirKey);
         raw.pack(shamirUserKey);
+//        raw.pack("string");
         raw.pack("string");
         raw.pack(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         String transferData = raw.toHex();
@@ -73,7 +74,7 @@ public class Jeos {
 
         // ④ build the all actions
         List<TransactionAction> actions = Arrays.asList(//
-                new TransactionAction("shamirmanage", "create", authorizations, transferData)
+                new TransactionAction("shamir12", "create", authorizations, transferData)
         );
 
         // ⑤ build the packed transaction
@@ -99,7 +100,7 @@ public class Jeos {
         System.out.println(localApi.getObjectMapper().writeValueAsString(pts));
     }
 
-    static void callGetContract(Long id) throws Exception{
+    public void callGetContract(Long id) throws Exception{
         // --- get the current state of blockchain
         EosApi eosApi = EosApiFactory.create(chainUrl, chainUrl, chainUrl);
         SignArg arg = eosApi.getSignArg(120);
@@ -146,7 +147,7 @@ public class Jeos {
         System.out.println(localApi.getObjectMapper().writeValueAsString(pts));
     }
 
-    static void callEraseContract(Long id) throws Exception{
+    public void callEraseContract(Long id) throws Exception{
         // --- get the current state of blockchain
         EosApi eosApi = EosApiFactory.create(chainUrl, chainUrl, chainUrl);
         SignArg arg = eosApi.getSignArg(120);
@@ -193,4 +194,5 @@ public class Jeos {
         PushedTransaction pts = eosApi.pushTransaction(req);
         System.out.println(localApi.getObjectMapper().writeValueAsString(pts));
     }
+
 }

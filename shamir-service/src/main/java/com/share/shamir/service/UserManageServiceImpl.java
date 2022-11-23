@@ -6,6 +6,7 @@ import com.share.shamir.dal.mapper.OrganizationMapper;
 import com.share.shamir.dal.mapper.ShamirMapper;
 import com.share.shamir.dal.mapper.UserMapper;
 import com.share.shamir.model.UserManageModel;
+import com.share.shamir.util.eosio.java.abieos.serialization.EosUtils;
 import com.share.shamir.util.shamir.ShamirUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +16,10 @@ import org.springframework.stereotype.Service;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.*;
+
+import static com.share.shamir.util.shamir.ShamirUtils.getSHA256StrJava;
 
 @Service
 public class UserManageServiceImpl implements UserManageService {
@@ -106,7 +110,7 @@ public class UserManageServiceImpl implements UserManageService {
      * @param keyName
      */
     @Override
-    public Boolean keyDistribution(List<Integer> userId, String key, int min, String keyName) {
+    public Boolean keyDistribution(List<Integer> userId, String key, int min, String keyName) throws Exception {
         //创建密钥分配
         HashMap<Integer, byte[]> keyDistribution = new HashMap<>();
         //创建密钥分配人员数据库模型
@@ -134,6 +138,9 @@ public class UserManageServiceImpl implements UserManageService {
             shamir.setId(null);
             //分配密钥
             shamirMapper.insertSelective(shamir);
+            //密钥分配数据上链
+            EosUtils eos = new EosUtils("http://10.28.217.174:10101","5J61mY3dcgHb4egBYVWz4av68y24JzqteKRHMFrDXyhmQdbkhbr","alice");
+            eos.callCreateContract(user.getUsername(), keyName, getSHA256StrJava(aStr));
         }
         return true;
     }

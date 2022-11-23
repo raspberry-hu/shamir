@@ -50,7 +50,7 @@ public interface UserManageService {
      * @param min
      * @param keyName
      */
-    Boolean keyDistribution(List<Integer> userId, String key, int min, String keyName);
+    Boolean keyDistribution(List<Integer> userId, String key, int min, String keyName) throws Exception;
 
     /**
      * 密钥恢复

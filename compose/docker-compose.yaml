@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  eosio:
+    image: hushaozhou/eos
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./contract:/root/shamir12
+    command: /bin/bash -c "cd /root/shamir12 && ./start.sh"
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: root

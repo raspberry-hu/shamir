@@ -68,9 +68,14 @@ public class ShamirController {
     @RequestMapping(value = "/distributekey", method = RequestMethod.POST)
     public @ResponseBody CommonResponse distributeKey(@RequestBody DistributeKeyRequest distributeKeyRequest) {
         LOGGER.info("记录接口请求参数:{},{},{},{}", distributeKeyRequest.getMin(), distributeKeyRequest.getKeyName(),distributeKeyRequest.getKey(), distributeKeyRequest.getUsers());
-        Boolean result = userManageService.keyDistribution(distributeKeyRequest.getUsers(), distributeKeyRequest.getKey(), distributeKeyRequest.getMin(), distributeKeyRequest.getKeyName());
-        if(result){
-            return ResponseBuilder.success("分发密钥成功");
+        try {
+            Boolean result = userManageService.keyDistribution(distributeKeyRequest.getUsers(), distributeKeyRequest.getKey(), distributeKeyRequest.getMin(), distributeKeyRequest.getKeyName());
+            if(result){
+                return ResponseBuilder.success("分发密钥成功");
+            }
+        }catch (Exception e) {
+            LOGGER.error("分发密钥失败", e);
+            return ResponseBuilder.error("分发密钥失败");
         }
         return ResponseBuilder.error("分发密钥失败");
     }
