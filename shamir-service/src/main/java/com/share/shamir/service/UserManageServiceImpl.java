@@ -41,6 +41,7 @@ public class UserManageServiceImpl implements UserManageService {
     public void userInsert(UserManageModel userManageModel) {
         User user = new User();
         user.setRole(userManageModel.getRole());
+        user.setUser_id("test");
         user.setEmail(userManageModel.getEmail());
         user.setUsername(userManageModel.getUsername());
         user.setPassword(userManageModel.getPassword());
@@ -48,6 +49,10 @@ public class UserManageServiceImpl implements UserManageService {
         user.setId(null);
         user.setShamirkey("zero");
         user.setShamirid("zero");
+        user.setFhe_pk(null);
+        user.setFhe_sk(null);
+        user.setEcc_pk(null);
+        user.setEcc_sk(null);
         userMapper.insert(user);
     }
 
