@@ -15,13 +15,15 @@ CREATE TABLE `china_mobile`.`user`  (
     `ecc_pk` varchar(128) DEFAULT NULL,
     `ecc_sk` varchar(128) DEFAULT NULL
 ) ENGINE = InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-
+use china_mobile;
+DROP TABLE IF EXISTS `shamir`;
 CREATE TABLE `china_mobile`.`shamir`
 (
     `id`       INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     `shamirId` VARCHAR(45) NOT NULL,
     `shamirKey` VARCHAR(125) NOT NULL,
-    `shamirUserKey` INT NOT NULL
+    `shamirUserKey` INT NOT NULL,
+    `approve` VARCHAR(125) Default NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `china_mobile`.`organization`

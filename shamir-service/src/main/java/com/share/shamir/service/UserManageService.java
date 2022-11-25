@@ -57,4 +57,22 @@ public interface UserManageService {
      * @param
      */
     String keyRestore(String keyName) throws UnsupportedEncodingException;
+
+    /**
+     * 获取当前用户下所有密钥名称
+     * @param
+     */
+    List<String> getKeyNames(int userId);
+
+    /**
+     * 获取当前用户下所有密钥
+     * @param
+     */
+    List<String> getKeys(int userId);
+
+    /**
+     * 同意分配密钥
+     * @param
+     */
+    void approveKey(int userId, String keyName);
 }

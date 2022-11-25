@@ -41,7 +41,7 @@ public class UserManageServiceImpl implements UserManageService {
     public void userInsert(UserManageModel userManageModel) {
         User user = new User();
         user.setRole(userManageModel.getRole());
-        user.setUser_id("test");
+        user.setUser_id(String.valueOf(System.nanoTime()));
         user.setEmail(userManageModel.getEmail());
         user.setUsername(userManageModel.getUsername());
         user.setPassword(userManageModel.getPassword());
@@ -141,6 +141,7 @@ public class UserManageServiceImpl implements UserManageService {
             shamir.setShamirid(keyName);
             shamir.setShamiruserkey(userId.get(i));
             shamir.setId(null);
+            shamir.setApprove("disapprove");
             //分配密钥
             shamirMapper.insertSelective(shamir);
             //密钥分配数据上链
@@ -161,8 +162,45 @@ public class UserManageServiceImpl implements UserManageService {
         System.out.println("打印0" + shamirs);
         HashMap<Integer, byte[]> temp = new HashMap<>();
         for(int i = 0; i < shamirs.size(); i++) {
-            temp.put(i+1, shamirs.get(i).getShamirkey().getBytes(Charset.forName("ISO-8859-1")));
+            if(shamirs.get(i).getApprove().equals("approve")) {
+                temp.put(i+1, shamirs.get(i).getShamirkey().getBytes(Charset.forName("ISO-8859-1")));
+            }
+//            temp.put(i+1, shamirs.get(i).getShamirkey().getBytes(Charset.forName("ISO-8859-1")));
         }
         return ShamirUtils.shamirRecover(temp);
+    }
+
+    @Override
+    public List<String> getKeyNames(int userId) {
+        List<Shamir> sharp = shamirMapper.selectByShamirUserKey(userId);
+        List<String> keyNames = new ArrayList<>();
+        for (Shamir shamir : sharp) {
+            keyNames.add(shamir.getShamirid());
+        }
+        return keyNames;
+    }
+
+    @Override
+    public List<String> getKeys(int userId) {
+        List<Shamir> sharp = shamirMapper.selectByShamirUserKey(userId);
+        List<String> keyNames = new ArrayList<>();
+        for (Shamir shamir : sharp) {
+            keyNames.add(shamir.getShamirkey());
+        }
+        return keyNames;
+    }
+
+    @Override
+    public void approveKey(int userId, String keyName) {
+        List<Shamir> sharp = shamirMapper.selectByShamirUserKey(userId);
+        Shamir temp = null;
+        for (Shamir shamir : sharp) {
+            System.out.println(shamir.getShamirid());
+            if(shamir.getShamirid().equals(keyName)) {
+                temp = shamir;
+            }
+        }
+        temp.setApprove("approve");
+        shamirMapper.updateByPrimaryKey(temp);
     }
 }

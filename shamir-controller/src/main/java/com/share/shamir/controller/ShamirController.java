@@ -52,8 +52,12 @@ public class ShamirController {
         userManageModel.setPhone(registerRequest.getPhone());
         userManageModel.setEmail(registerRequest.getEmail());
         userManageModel.setRole(registerRequest.getRole());
-
-        userManageService.userInsert(userManageModel);
+        try {
+            userManageService.userInsert(userManageModel);
+        }catch (Exception e) {
+            LOGGER.error("用户注册失败");
+            return ResponseBuilder.error("信息重复用户注册失败");
+        }
         LOGGER.info("用户注册成功");
         return ResponseBuilder.success("注册成功");
     }
@@ -93,12 +97,34 @@ public class ShamirController {
 
     @RequestMapping(value = "/getkeyname", method = RequestMethod.POST)
     public @ResponseBody CommonResponse keyRestore(@RequestBody GetKeyNameRequest getKeyNameRequest) {
-        LOGGER.info("记录接口请求参数:{}", getKeyNameRequest.getUsername());
+        LOGGER.info("记录接口请求参数:{}", getKeyNameRequest.getUserId());
         try{
-            String key = userManageService.keyRestore(getKeyNameRequest.getUsername());
+            List<String> key = userManageService.getKeyNames(getKeyNameRequest.getUserId());
             return ResponseBuilder.success(key);
         } catch (Exception e) {
             return ResponseBuilder.error("获取密钥名称失败");
+        }
+    }
+
+    @RequestMapping(value = "/getshamiruserkey", method = RequestMethod.POST)
+    public @ResponseBody CommonResponse getUserShamirKey(@RequestBody GetUserShamirKey getUserShamirKey) {
+        LOGGER.info("记录接口请求参数:{}", getUserShamirKey.getUserId());
+        try{
+            List<String> keys = userManageService.getKeys(getUserShamirKey.getUserId());
+            return ResponseBuilder.success(keys);
+        }catch (Exception e) {
+            return ResponseBuilder.error("获取用户密钥失败");
+        }
+    }
+
+    @RequestMapping(value = "/approveshamirkey", method = RequestMethod.POST)
+    public @ResponseBody CommonResponse approveShamirKey(@RequestBody ApproveShamirKeyRequest approveShamirKeyRequest) {
+        LOGGER.info("记录接口请求参数:{},{}", approveShamirKeyRequest.getShamirKeyName(), approveShamirKeyRequest.getUserId());
+        try{
+            userManageService.approveKey(approveShamirKeyRequest.getUserId(), approveShamirKeyRequest.getShamirKeyName());
+            return ResponseBuilder.success("审批成功");
+        }catch (Exception e) {
+            return ResponseBuilder.error("审批失败");
         }
     }
 }
