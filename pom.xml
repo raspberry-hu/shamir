@@ -68,6 +68,7 @@
 		<!--本地版本 开始 -->
 		<self.version>0.0.1-SNAPSHOT</self.version>
 		<!--本地版本 结束 -->
+		<start-class>com.share.shamir.biz.MainApplication</start-class>
 	</properties>
 
 	<groupId>com.example</groupId>
@@ -84,6 +85,9 @@
 		<module>shamir-util</module>
 	</modules>
 	<!-- 模块结束：声明biz、dal、controller、service模块 -->
+
+
+
 	<!-- 版本说明: 统一管理版本号 -->
 	<dependencyManagement>
 	<dependencies>
@@ -280,12 +284,7 @@
 			<!--本地模块 开始 -->
 			<dependency>
 				<groupId>com.example</groupId>
-				<artifactId>shamir-biz</artifactId>
-				<version>${self.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.example</groupId>
-				<artifactId>shamir-controller</artifactId>
+				<artifactId>shamir-util</artifactId>
 				<version>${self.version}</version>
 			</dependency>
 			<dependency>
@@ -300,7 +299,12 @@
 			</dependency>
 			<dependency>
 				<groupId>com.example</groupId>
-				<artifactId>shamir-util</artifactId>
+				<artifactId>shamir-controller</artifactId>
+				<version>${self.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.example</groupId>
+				<artifactId>shamir-biz</artifactId>
 				<version>${self.version}</version>
 			</dependency>
 			<!--本地模块 结束 -->
@@ -309,10 +313,10 @@
 	<!-- 对应插件 -->
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.springframework.boot</groupId>-->
+<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--			</plugin>-->
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>
 				<artifactId>mybatis-generator-maven-plugin</artifactId>

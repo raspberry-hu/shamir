@@ -11,6 +11,11 @@ import com.share.shamir.util.shamir.ShamirUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.UnsupportedEncodingException;
@@ -32,6 +37,15 @@ public class UserManageServiceImpl implements UserManageService {
     private ShamirMapper shamirMapper;
     @Autowired
     private OrganizationMapper organizationMapper;
+
+    @Value("${eosio.chainurl}")
+    private String chainUrl;
+
+    @Value("${eosio.privatekey}")
+    private String privatekey;
+
+    @Value("${eosio.username}")
+    private String username;
 
     /**
      * 用户注册接口
@@ -145,8 +159,8 @@ public class UserManageServiceImpl implements UserManageService {
             //分配密钥
             shamirMapper.insertSelective(shamir);
             //密钥分配数据上链
-            EosUtils eos = new EosUtils("http://10.28.217.174:10101","5J61mY3dcgHb4egBYVWz4av68y24JzqteKRHMFrDXyhmQdbkhbr","alice");
-            eos.callCreateContract(user.getUsername(), keyName, getSHA256StrJava(aStr));
+//            EosUtils eos = new EosUtils(chainUrl,privatekey,username);
+//            eos.callCreateContract(user.getUsername(), keyName, getSHA256StrJava(aStr));
         }
         return true;
     }
