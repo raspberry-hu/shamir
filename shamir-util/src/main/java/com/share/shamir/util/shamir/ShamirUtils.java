@@ -29,7 +29,7 @@ public class ShamirUtils {
     }
 
     public static void main(String[] args) {
-        HashMap<Integer, byte[]> parts = shamirGenerate("vvtest123", 5, 3);
+        HashMap<Integer, byte[]> parts = shamirGenerate("vvtest123", 3, 3);
         System.out.println(parts);
         System.out.println(shamirRecover(parts));
     }

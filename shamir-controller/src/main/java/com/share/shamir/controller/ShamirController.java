@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -85,12 +86,16 @@ public class ShamirController {
     }
 
     @RequestMapping(value = "/keyrestore", method = RequestMethod.POST)
-    public @ResponseBody CommonResponse keyRestore(@RequestBody KeyRestoreRequest KeyRestoreRequest) {
-        LOGGER.info("记录接口请求参数:{}", KeyRestoreRequest.getKeyName());
+    public @ResponseBody CommonResponse keyRestore(@RequestBody KeyRestoreRequest KeyRestoreRequest) throws UnsupportedEncodingException {
+        LOGGER.info("记录接口请求参数:{},{}", KeyRestoreRequest.getKeyName(), KeyRestoreRequest.getUserId());
         try{
-            String key = userManageService.keyRestore(KeyRestoreRequest.getKeyName());
+            String key = userManageService.keyRestore(KeyRestoreRequest.getKeyName(), KeyRestoreRequest.getUserId());
+            if (key == "false") {
+                return ResponseBuilder.error("请选择你当前有权限的密钥恢复");
+            }
             return ResponseBuilder.success(key);
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseBuilder.error("恢复密钥失败");
         }
     }
@@ -110,7 +115,7 @@ public class ShamirController {
     public @ResponseBody CommonResponse getUserShamirKey(@RequestBody GetUserShamirKey getUserShamirKey) {
         LOGGER.info("记录接口请求参数:{}", getUserShamirKey.getUserId());
         try{
-            List<String> keys = userManageService.getKeys(getUserShamirKey.getUserId());
+            List<List<String>> keys = userManageService.getKeys(getUserShamirKey.getUserId());
             return ResponseBuilder.success(keys);
         }catch (Exception e) {
             return ResponseBuilder.error("获取用户密钥失败");

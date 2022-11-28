@@ -156,16 +156,23 @@ public class UserManageServiceImpl implements UserManageService {
      * @param keyName
      */
     @Override
-    public String keyRestore(String keyName) throws UnsupportedEncodingException {
+    public String keyRestore(String keyName, Integer id) throws UnsupportedEncodingException {
         //获取密钥恢复人员信息
+        String judge = "false";
         List<Shamir> shamirs = shamirMapper.selectByShamirId(keyName);
-        System.out.println("打印0" + shamirs);
+        for(Shamir shamir : shamirs) {
+            if(shamir.getShamiruserkey().equals(id)) {
+                judge = "true";
+            }
+        }
+        if(judge.equals("false")) {
+            return "false";
+        }
         HashMap<Integer, byte[]> temp = new HashMap<>();
         for(int i = 0; i < shamirs.size(); i++) {
             if(shamirs.get(i).getApprove().equals("approve")) {
                 temp.put(i+1, shamirs.get(i).getShamirkey().getBytes(Charset.forName("ISO-8859-1")));
             }
-//            temp.put(i+1, shamirs.get(i).getShamirkey().getBytes(Charset.forName("ISO-8859-1")));
         }
         return ShamirUtils.shamirRecover(temp);
     }
@@ -181,13 +188,16 @@ public class UserManageServiceImpl implements UserManageService {
     }
 
     @Override
-    public List<String> getKeys(int userId) {
+    public List<List<String>> getKeys(int userId) {
         List<Shamir> sharp = shamirMapper.selectByShamirUserKey(userId);
-        List<String> keyNames = new ArrayList<>();
+        List<List<String>> result = new LinkedList<>();
         for (Shamir shamir : sharp) {
-            keyNames.add(shamir.getShamirkey());
+            List<String> temp = new ArrayList<>();
+            temp.add(shamir.getShamirkey());
+            temp.add(shamir.getShamirid());
+            result.add(temp);
         }
-        return keyNames;
+        return result;
     }
 
     @Override
