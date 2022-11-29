@@ -1,10 +1,14 @@
 version: "3"
 
 services:
-  mysql:
-    image: mysql:5.7
+  shamir:
+    image: hushaozhou/shamir:latest
     ports:
-      - "3306:3306"
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: root
+      - "8087:8080"
+  ipfs:
+    image: ipfs/kubo:latest
+    ports:
+      - "5001:5001"
+      - "4001:4001"
+      - "8080:8080"
+    restart: always
