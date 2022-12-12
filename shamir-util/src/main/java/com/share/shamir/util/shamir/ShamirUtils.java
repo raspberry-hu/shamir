@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class ShamirUtils {
@@ -28,10 +29,47 @@ public class ShamirUtils {
         return new String(recovered, StandardCharsets.UTF_8);
     }
 
-    public static void main(String[] args) {
-        HashMap<Integer, byte[]> parts = shamirGenerate("vvtest123", 3, 3);
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        HashMap<Integer, byte[]> parts = shamirGenerate("china", 5, 4);
+        Iterator<Map.Entry<Integer, byte[]>> iterator = parts.entrySet().iterator();
+        HashMap<Integer, byte[]> temp = new HashMap<>();
+        for (int i = 0; i < 5; i++) {
+            Map.Entry<Integer, byte[]> entry = iterator.next();
+            //获取用户信息
+            //获取用户密钥分配信息
+            byte[] a = entry.getValue();
+            System.out.println(Arrays.toString(a));
+//            System.out.println(a);
+//            String aStr = new String(a, "ISO-8859-1");
+//            String aStr = new String(a, "utf-8");
+//            System.out.println(aStr);
+            String[] end = new String[a.length];
+            String temp1 = Arrays.toString(a);
+            temp1 = temp1.substring(1,temp1.length()-1);
+//            System.out.println(temp1);
+            temp1 = temp1.replaceAll(" ", "");
+            System.out.println(temp1);
+            String delimeter = ",";
+            end = temp1.split(delimeter);
+//            System.out.println(end);
+
+            byte b[];
+            b = new byte[end.length];
+            for (int j = 0;j < end.length;j++) {
+                b[j] = (byte) Integer.parseInt(end[j]);
+            }
+            System.out.println(Arrays.toString(b));
+            temp.put(i+1, a);
+
+//            System.out.println(aStr.getBytes("ISO-8859-1"));
+//            temp.put(i+1, aStr.getBytes("utf-8"));
+//            System.out.println(Arrays.toString(aStr.getBytes("utf-8")));
+        }
+
         System.out.println(parts);
-        System.out.println(shamirRecover(parts));
+        System.out.println(temp);
+//        System.out.println(shamirRecover(parts));
+//        System.out.println(shamirRecover(temp));
     }
 
     public static String getSHA256StrJava(String str){

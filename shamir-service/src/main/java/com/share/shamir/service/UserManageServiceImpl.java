@@ -138,6 +138,7 @@ public class UserManageServiceImpl implements UserManageService {
         List<UserManageModel> userModels = null;
         //将密钥分配给用户
         keyDistribution = ShamirUtils.shamirGenerate(key, userId.size(), min);
+        System.out.println(keyDistribution);
         Iterator<Map.Entry<Integer, byte[]>> iterator = keyDistribution.entrySet().iterator();
         for (int i = 0; i < userId.size(); i++) {
             Map.Entry<Integer, byte[]> entry = iterator.next();
@@ -150,8 +151,9 @@ public class UserManageServiceImpl implements UserManageService {
             Shamir shamir = new Shamir();
             byte[] a = entry.getValue();
             System.out.println(Arrays.toString(a));
-            String aStr = new String(a, Charset.forName("ISO-8859-1"));
-            shamir.setShamirkey(aStr);
+//            String aStr = new String(a, Charset.forName("ISO-8859-1"));
+            System.out.println("密钥打印");
+            shamir.setShamirkey(Arrays.toString(a));
             shamir.setShamirid(keyName);
             shamir.setShamiruserkey(userId.get(i));
             shamir.setId(null);
@@ -185,9 +187,23 @@ public class UserManageServiceImpl implements UserManageService {
         HashMap<Integer, byte[]> temp = new HashMap<>();
         for(int i = 0; i < shamirs.size(); i++) {
             if(shamirs.get(i).getApprove().equals("approve")) {
-                temp.put(i+1, shamirs.get(i).getShamirkey().getBytes(Charset.forName("ISO-8859-1")));
+//                System.out.println("密钥恢复" + shamirs.get(i).getShamirkey().getBytes(Charset.forName("ISO-8859-1")));
+                String[] end;
+                String tempKey = shamirs.get(i).getShamirkey();
+                tempKey = tempKey.substring(1,tempKey.length()-1);
+                tempKey = tempKey.replaceAll(" ", "");
+                String delimeter = ",";
+                end = tempKey.split(delimeter);
+                byte b[];
+                b = new byte[end.length];
+                for (int j = 0;j < end.length;j++) {
+                    b[j] = (byte) Integer.parseInt(end[j]);
+                }
+                System.out.println(Arrays.toString(b));
+                temp.put(i+1, b);
             }
         }
+        System.out.println(temp);
         return ShamirUtils.shamirRecover(temp);
     }
 

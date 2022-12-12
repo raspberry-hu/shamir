@@ -36,12 +36,6 @@
         <!--内部jar包 结束 -->
     </dependencies>
 
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-
 <!--    <build>-->
 <!--        <plugins>-->
 <!--            <plugin>-->
