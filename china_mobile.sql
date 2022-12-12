@@ -1,4 +1,3 @@
-DROP DATABASE IF EXISTS china_mobile;
 CREATE DATABASE china_mobile;
 use china_mobile;
 DROP TABLE IF EXISTS `user`;
