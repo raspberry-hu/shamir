@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+<!--<mirrors>-->
+<!--    <mirror>-->
+<!--      &lt;!&ndash;  <id>aliyun-central</id>-->
+<!--        <mirrorOf>*</mirrorOf>-->
+<!--        <name>阿里云公共仓库</name>-->
+<!--        <url>http://10.252.205.93:20100/artifactory/maven</url>&ndash;&gt;-->
+<!--        <id>cmcc-devops</id>-->
+<!--        <mirrorOf>*</mirrorOf>-->
+<!--        <name>maven</name>-->
+<!--        <url>https://artifactory.dep.devops.cmit.cloud:20101/artifactory/cmbaas-java-pkg</url>-->
+<!--    </mirror>-->
+<!--</mirrors>-->
+    <servers>
+        <server>
+            <username>xoi1oehmofol</username>
+            <password>jwSqePlqjjwI</password>
+            <id>cmcc-devops</id>
+        </server>
+    </servers>
+    <profiles>
+        <profile>
+            <repositories>
+                <repository>
+                    <id>cmcc-devops</id>
+                    <name>maven</name>
+                    <url>https://artifactory.dep.devops.cmit.cloud:20101/artifactory/cmbaas-java-pkg</url>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>cmcc-devops</id>
+                    <name>maven</name>
+                    <url>https://artifactory.dep.devops.cmit.cloud:20101/artifactory/maven</url>
+                </pluginRepository>
+            </pluginRepositories>
+            <id>artifactory</id>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>artifactory</activeProfile>
+    </activeProfiles>
+</settings>
