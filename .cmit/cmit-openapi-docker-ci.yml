@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master", "dev" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master", "dev" ]
+    branches: ["master"]
 
 jobs:
   build:
@@ -15,10 +15,10 @@ jobs:
       - name: set env TAG
         run: echo "TAG=$(date +%s)" >> $GITHUB_ENV
       - name: Build the Docker image
-        run: docker build . --file ${{env.PROJECT_PATH}}/panzhou-ci.Dockerfile --label commit-id=${{env.GIT_COMMIT_ID}} --label branch=${{env.GIT_BRANCH}} --tag artifactory.dep.devops.cmit.cloud:20101/cmbaas/service/openapi:${{env.GIT_COMMIT_ID}} --build-arg PROJECT_PATH=${{env.PROJECT_PATH}}
+        run: docker build . --file ${{env.PROJECT_PATH}}/panzhou-ci.Dockerfile --label commit-id=${{env.GIT_COMMIT_ID}} --label branch=${{env.GIT_BRANCH}} --tag artifactory.dep.devops.cmit.cloud:20101/cmbaas/service/by_shamir:${{env.GIT_COMMIT_ID}} --build-arg PROJECT_PATH=${{env.PROJECT_PATH}}
       - name: docker login
         run: docker login artifactory.dep.devops.cmit.cloud:20101 -u ${{env.USER_NAME}} -p ${{env.PASSWORD}}
       - name: docker push
-        run: docker push artifactory.dep.devops.cmit.cloud:20101/cmbaas/service/openapi:${{env.GIT_COMMIT_ID}}
+        run: docker push artifactory.dep.devops.cmit.cloud:20101/cmbaas/service/by_shamir:${{env.GIT_COMMIT_ID}}
       - name: remove local docker image
-        run: docker image rm -f artifactory.dep.devops.cmit.cloud:20101/cmbaas/service/openapi:${{env.GIT_COMMIT_ID}}
+        run: docker image rm -f artifactory.dep.devops.cmit.cloud:20101/cmbaas/service/by_shamir:${{env.GIT_COMMIT_ID}}
