@@ -1,0 +1,10 @@
+com/share/shamir/dal/mapper/ShamirMapper.class
+com/share/shamir/dal/entity/UserWithBLOBs.class
+com/share/shamir/dal/entity/User.class
+com/share/shamir/dal/mapper/OrganizationMapper.class
+com/share/shamir/dal/mapper/UserMapper.class
+com/share/shamir/dal/entity/Shamir.class
+com/share/shamir/dal/entity/UserKey.class
+com/share/shamir/dal/source/DataSourceConfig.class
+com/share/shamir/dal/source/DataSourceConfig$DevConfig.class
+com/share/shamir/dal/entity/Organization.class

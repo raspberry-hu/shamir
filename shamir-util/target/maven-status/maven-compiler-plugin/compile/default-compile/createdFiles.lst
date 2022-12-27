@@ -1,0 +1,3 @@
+com/share/shamir/util/ipfs/ipfsUtils.class
+com/share/shamir/util/shamir/ShamirUtils.class
+com/share/shamir/util/eosio/java/abieos/serialization/EosUtils.class
